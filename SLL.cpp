@@ -152,6 +152,146 @@ public:
     }
   }
   //deletion operation ends
+  
+  void sortedInsertion(int key)
+  {
+    if (!head)
+      cout << "List is empty" << endl;
+    else
+    {
+      Node *temp{head}, *r{nullptr};
+      while (temp && temp->key < key)
+      {
+        r = temp;
+        temp = temp->next;
+      }
+      Node *t{createNode(key)};
+      t->next = r->next;
+      r->next = t;
+    }
+  }
+
+  bool isLoop()
+  {
+    if (!head)
+      return false;
+    else
+    {
+      Node *fast, *slow;
+      fast = slow = head;
+      while (fast && slow)
+      {
+        slow = slow->next;
+        fast = fast->next;
+        //check is fast has not pointing null
+        fast = (fast != nullptr) ? fast->next : nullptr;
+        if (fast == slow)
+          return true;
+      }
+    }
+    return false;
+  }
+
+  int middle()
+  {
+    if (!head)
+      return -1;
+    else
+    {
+      Node *temp = head;
+      int count{0};
+
+      while (temp)
+      {
+        count++;
+        temp = temp->next;
+      }
+      count /= 2;
+      temp = head;
+      while (count--)
+        temp = temp->next;
+      return temp->key;
+    }
+  }
+
+  int min()
+  {
+    if (!head)
+      return -1;
+    else
+    {
+      int minimum{INT32_MAX};
+      Node *t = head;
+      while (t)
+      {
+        if (minimum > t->key && t)
+          minimum = t->key;
+        t = t->next;
+      }
+      return minimum;
+    }
+    return -1;
+  }
+
+  int max()
+  {
+    if (!head)
+      return -1;
+    else
+    {
+      int maximum{INT32_MIN};
+      Node *t = head;
+      while (t)
+      {
+        if (maximum < t->key && t)
+          maximum = t->key;
+        t = t->next;
+      }
+      return maximum;
+    }
+    return -1;
+  }
+
+  int sum()
+  {
+    if (!head)
+      return -1;
+    else
+    {
+      int add{0};
+      Node *t = head;
+      while (t)
+      {
+        add += t->key;
+        t = t->next;
+      }
+      return add;
+    }
+  }
+
+  Node *reverse()
+  {
+    if (!head)
+    {
+      cout << "List is empty" << endl;
+      return nullptr;
+    }
+    else
+    {
+      //sliding pointers concept
+      Node *r, *q, *p = head;
+      r = q = nullptr;
+      while (p)
+      {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+      }
+      head = q;
+      return head;
+    }
+  }
 
   bool find(int key)
   {
