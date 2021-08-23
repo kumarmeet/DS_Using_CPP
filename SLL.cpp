@@ -153,6 +153,19 @@ public:
   }
   //deletion operation ends
   
+  void updateKey(int position, int key)
+  {
+    if (!head || position <= 0)
+      cout << "List is empty" << endl;
+    else
+    {
+      Node *temp = head;
+      while (--position)
+        temp = temp->next;
+      t->key = key; // update key
+    }
+  }
+  
   void sortedInsertion(int key)
   {
     if (!head)
