@@ -31,7 +31,7 @@ public:
     head = nullptr;
   }
   //insertion operations
-  void insertAtBegining(int key); //!bug detected
+  void insertAtBegining(int key); 
   void insertAtEnd(int key);
   void insertAtGivenPosition(int key, int position);
   //insertion operations ends
@@ -101,15 +101,16 @@ void LinkedList ::deleteAtEnd()
 
 void LinkedList::insertAtBegining(int key)
 {
+  Node *n = createNode(key);
   if (!head)
-    return;
+    head = n;
   else
   {
-    Node *n = createNode(key);
     Node *t = head;
     n->prev = t->prev;
-    n->next = t;
+    n->next = t->prev->next;
     t->prev->next = n;
+    t->prev = n;
     head = n;
   }
 }
