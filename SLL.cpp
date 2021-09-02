@@ -151,6 +151,28 @@ public:
         cout << "Key is not found in list" << endl;
     }
   }
+  
+  Node* deleteNthFromEnd(int n)
+    {
+        // 1 -> 2 -> 3 -> 4 -> 5
+        Node *t{head}, *r{head};
+
+        for(int i = 0; i < n; ++i)
+            t = t->next;
+
+        if(t == nullptr)
+            return head->next;
+
+        while(t->next)
+        {
+            r = r->next;
+            t = t->next;
+        }
+
+        r->next = r->next->next;
+
+        return head;
+    }
   //deletion operation ends
   
   void updateKey(int position, int key)
